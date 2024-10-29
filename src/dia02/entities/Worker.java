@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Worker {
     private String name;
-    private Double baseSalary;
+    private double baseSalary;
     private WorkerLevel level;
 
     private Department department;
@@ -18,7 +18,7 @@ public class Worker {
 
     }
 
-    public Worker(String name, Double baseSalary, WorkerLevel level, Department department) {
+    public Worker(String name, double baseSalary, WorkerLevel level, Department department) {
         this.name = name;
         this.baseSalary = baseSalary;
         this.level = level;
