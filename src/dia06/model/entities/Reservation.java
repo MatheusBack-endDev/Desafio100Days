@@ -1,5 +1,7 @@
 package dia06.model.entities;
 
+import dia06.model.exceptions.DomainException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -16,6 +18,9 @@ public class Reservation {
     }
 
     public Reservation(Integer romNumber, Date checkout, Date checkin) {
+        if (checkin.after(checkout)) {
+            throw new DomainException("erro data de check-out anterior a de check-in");
+        }
         this.romNumber = romNumber;
         this.checkout = checkout;
         this.checkin = checkin;
@@ -42,18 +47,18 @@ public class Reservation {
         return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
 
-    public String updateDates(Date checkin, Date checkout){
+    public void updateDates(Date checkin, Date checkout) {
 
         Date now = new Date();
         if (checkin.before(now) || checkout.before(now)){
-            return "erro data de atualizcao anterior";
+            throw new DomainException("erro data de atualizcao anterior");
         } else if (checkin.after(checkout)) {
-           return "erro data de check-out anterior a de check-in";
+           throw new DomainException("erro data de check-out anterior a de check-in");
         }
 
         this.checkin = checkin;
         this.checkout = checkout;
-        return null;
+
     }
 
     @Override
