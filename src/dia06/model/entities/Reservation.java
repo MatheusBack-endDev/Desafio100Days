@@ -17,7 +17,7 @@ public class Reservation {
 
     }
 
-    public Reservation(Integer romNumber, Date checkout, Date checkin) {
+    public Reservation(Integer romNumber, Date checkout, Date checkin) throws DomainException {
         if (checkin.after(checkout)) {
             throw new DomainException("erro data de check-out anterior a de check-in");
         }
@@ -47,7 +47,7 @@ public class Reservation {
         return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
 
-    public void updateDates(Date checkin, Date checkout) {
+    public void updateDates(Date checkin, Date checkout) throws DomainException {
 
         Date now = new Date();
         if (checkin.before(now) || checkout.before(now)){
@@ -58,7 +58,6 @@ public class Reservation {
 
         this.checkin = checkin;
         this.checkout = checkout;
-
     }
 
     @Override
